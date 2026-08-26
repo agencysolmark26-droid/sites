@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
+import { sql, ensureSchema } from "./db";
 
 export type Appointment = {
   id: string;
@@ -23,8 +24,6 @@ export type NewAppointmentInput = {
   phone: string;
   notes?: string;
 };
-
-const DATA_FILE = path.join(process.cwd(), "data", "appointments.json");
 
 // Clinic hours: Monday–Saturday 09:00–19:00, Sunday closed.
 // Slots are 30 minutes apart.
@@ -63,6 +62,20 @@ export function getAllSlotsForDate(dateStr: string): string[] {
   return slots;
 }
 
+export class SlotUnavailableError extends Error {
+  constructor() {
+    super("O horário selecionado já não está disponível.");
+    this.name = "SlotUnavailableError";
+  }
+}
+
+// ---------------------------------------------------------------------------
+// File-based backend — used for local development when no DATABASE_URL is
+// configured. Not suitable for serverless production (ephemeral filesystem).
+// ---------------------------------------------------------------------------
+
+const DATA_FILE = path.join(process.cwd(), "data", "appointments.json");
+
 async function ensureDataFile(): Promise<void> {
   try {
     await fs.access(DATA_FILE);
@@ -72,7 +85,7 @@ async function ensureDataFile(): Promise<void> {
   }
 }
 
-async function readAll(): Promise<Appointment[]> {
+async function readAllFromFile(): Promise<Appointment[]> {
   await ensureDataFile();
   const raw = await fs.readFile(DATA_FILE, "utf-8");
   try {
@@ -83,14 +96,111 @@ async function readAll(): Promise<Appointment[]> {
   }
 }
 
-async function writeAll(appointments: Appointment[]): Promise<void> {
+async function writeAllToFile(appointments: Appointment[]): Promise<void> {
   await ensureDataFile();
   await fs.writeFile(DATA_FILE, JSON.stringify({ appointments }, null, 2));
 }
 
-export async function getBookedTimesForDate(dateStr: string): Promise<string[]> {
-  const all = await readAll();
+async function getBookedTimesFromFile(dateStr: string): Promise<string[]> {
+  const all = await readAllFromFile();
   return all.filter((a) => a.date === dateStr).map((a) => a.time);
+}
+
+async function createAppointmentInFile(
+  appointment: Appointment
+): Promise<void> {
+  const all = await readAllFromFile();
+  const alreadyBooked = all.some(
+    (a) => a.date === appointment.date && a.time === appointment.time
+  );
+  if (alreadyBooked) throw new SlotUnavailableError();
+  all.push(appointment);
+  await writeAllToFile(all);
+}
+
+async function getAllAppointmentsFromFile(): Promise<Appointment[]> {
+  return readAllFromFile();
+}
+
+// ---------------------------------------------------------------------------
+// Postgres backend (Neon) — used automatically when DATABASE_URL is set,
+// which is the case once a database is linked to the Vercel project.
+// ---------------------------------------------------------------------------
+
+type AppointmentRow = {
+  id: string;
+  date: string;
+  time: string;
+  treatment_slug: string;
+  name: string;
+  email: string;
+  phone: string;
+  notes: string;
+  created_at: string | Date;
+};
+
+function rowToAppointment(row: AppointmentRow): Appointment {
+  return {
+    id: row.id,
+    date: row.date,
+    time: row.time,
+    treatmentSlug: row.treatment_slug,
+    name: row.name,
+    email: row.email,
+    phone: row.phone,
+    notes: row.notes,
+    createdAt:
+      row.created_at instanceof Date
+        ? row.created_at.toISOString()
+        : String(row.created_at),
+  };
+}
+
+async function getBookedTimesFromDb(dateStr: string): Promise<string[]> {
+  await ensureSchema();
+  const rows = (await sql!`
+    SELECT time FROM appointments WHERE date = ${dateStr}
+  `) as { time: string }[];
+  return rows.map((r) => r.time);
+}
+
+async function createAppointmentInDb(appointment: Appointment): Promise<void> {
+  await ensureSchema();
+  try {
+    await sql!`
+      INSERT INTO appointments
+        (id, date, time, treatment_slug, name, email, phone, notes, created_at)
+      VALUES
+        (${appointment.id}, ${appointment.date}, ${appointment.time},
+         ${appointment.treatmentSlug}, ${appointment.name}, ${appointment.email},
+         ${appointment.phone}, ${appointment.notes}, ${appointment.createdAt})
+    `;
+  } catch (err) {
+    const code = (err as { code?: string } | null)?.code;
+    if (code === "23505") throw new SlotUnavailableError();
+    throw err;
+  }
+}
+
+async function getAllAppointmentsFromDb(): Promise<Appointment[]> {
+  await ensureSchema();
+  const rows = (await sql!`
+    SELECT id, date, time, treatment_slug, name, email, phone, notes, created_at
+    FROM appointments
+    ORDER BY date, time
+  `) as AppointmentRow[];
+  return rows.map(rowToAppointment);
+}
+
+// ---------------------------------------------------------------------------
+// Public API — dispatches to the Postgres backend when configured, otherwise
+// falls back to the local file backend.
+// ---------------------------------------------------------------------------
+
+const usingDb = sql !== null;
+
+export async function getBookedTimesForDate(dateStr: string): Promise<string[]> {
+  return usingDb ? getBookedTimesFromDb(dateStr) : getBookedTimesFromFile(dateStr);
 }
 
 export async function getAvailableSlotsForDate(dateStr: string): Promise<string[]> {
@@ -99,24 +209,11 @@ export async function getAvailableSlotsForDate(dateStr: string): Promise<string[
   return all.filter((s) => !booked.has(s));
 }
 
-export class SlotUnavailableError extends Error {
-  constructor() {
-    super("O horário selecionado já não está disponível.");
-    this.name = "SlotUnavailableError";
-  }
-}
-
 export async function createAppointment(
   input: NewAppointmentInput
 ): Promise<Appointment> {
-  const all = await readAll();
   const validSlots = new Set(getAllSlotsForDate(input.date));
-  const alreadyBooked = all.some(
-    (a) => a.date === input.date && a.time === input.time
-  );
-  if (!validSlots.has(input.time) || alreadyBooked) {
-    throw new SlotUnavailableError();
-  }
+  if (!validSlots.has(input.time)) throw new SlotUnavailableError();
 
   const appointment: Appointment = {
     id: randomUUID(),
@@ -130,13 +227,17 @@ export async function createAppointment(
     createdAt: new Date().toISOString(),
   };
 
-  all.push(appointment);
-  await writeAll(all);
+  if (usingDb) {
+    await createAppointmentInDb(appointment);
+  } else {
+    await createAppointmentInFile(appointment);
+  }
+
   return appointment;
 }
 
 export async function getAllAppointments(): Promise<Appointment[]> {
-  const all = await readAll();
+  const all = usingDb ? await getAllAppointmentsFromDb() : await getAllAppointmentsFromFile();
   return all.sort((a, b) =>
     a.date === b.date ? a.time.localeCompare(b.time) : a.date.localeCompare(b.date)
   );

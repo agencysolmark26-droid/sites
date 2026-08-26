@@ -13,9 +13,22 @@ Site para uma clínica de biomagnetismo, construído com [Next.js](https://nextj
 
 ## Marcações
 
-As marcações são guardadas em `data/appointments.json` através das rotas de API em `src/app/api/marcacoes`. O horário de funcionamento (e os intervalos de 30 minutos entre consultas) está definido em `src/lib/appointments.ts`.
+As marcações são guardadas através das rotas de API em `src/app/api/marcacoes`, geridas por `src/lib/appointments.ts`. O horário de funcionamento (e os intervalos de 30 minutos entre consultas) também está definido nesse ficheiro.
+
+O armazenamento tem dois modos, escolhidos automaticamente:
+
+- **Com `DATABASE_URL` definida** (produção, ex: Vercel) — as marcações são guardadas numa base de dados Postgres (Neon).
+- **Sem `DATABASE_URL`** (desenvolvimento local) — as marcações são guardadas em `data/appointments.json`. Este modo não é adequado para produção em plataformas *serverless*, cujo sistema de ficheiros não é persistente.
 
 A área da clínica (`/admin`) usa a variável de ambiente `ADMIN_SECRET` como palavra-passe de acesso — ver `.env.example`. Se não for definida, usa uma palavra-passe por omissão (apenas para desenvolvimento).
+
+## Publicar no Vercel
+
+1. Criar conta em [vercel.com](https://vercel.com) (pode entrar diretamente com o GitHub).
+2. **Add New… → Project**, escolher o repositório `agencysolmark26-droid/sites` e a branch pretendida.
+3. Antes ou depois do primeiro deploy, ir a **Storage** → **Create Database** → escolher **Neon (Postgres)** e ligar ao projeto. Isto cria automaticamente a variável de ambiente `DATABASE_URL`.
+4. Em **Settings → Environment Variables**, adicionar `ADMIN_SECRET` com a palavra-passe pretendida para a área da clínica.
+5. Clicar em **Deploy**. O site fica disponível num link público (`*.vercel.app`), e volta a publicar-se automaticamente sempre que houver um novo push na branch ligada.
 
 ## Desenvolvimento
 
