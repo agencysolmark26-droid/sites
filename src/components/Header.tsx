@@ -17,9 +17,9 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-teal-900/10 bg-[var(--background)]/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-amber-900/10 bg-[var(--background)]/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 text-teal-800">
+        <Link href="/" className="flex items-center gap-2 text-amber-800">
           <MagnetPairIcon className="h-9 w-9" />
           <span className="text-lg font-semibold tracking-tight">
             Clínica Equilíbrio Bio
@@ -31,8 +31,8 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-teal-700 ${
-                pathname === link.href ? "text-teal-800" : "text-stone-600"
+              className={`text-sm font-medium transition-colors hover:text-amber-700 ${
+                pathname === link.href ? "text-amber-800" : "text-stone-600"
               }`}
             >
               {link.label}
@@ -40,7 +40,7 @@ export default function Header() {
           ))}
           <Link
             href="/marcar"
-            className="rounded-full bg-teal-700 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-800"
+            className="rounded-full bg-amber-700 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-amber-800"
           >
             Marcar Consulta
           </Link>
@@ -53,20 +53,20 @@ export default function Header() {
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="h-0.5 w-6 bg-teal-900" />
-          <span className="h-0.5 w-6 bg-teal-900" />
-          <span className="h-0.5 w-6 bg-teal-900" />
+          <span className="h-0.5 w-6 bg-amber-900" />
+          <span className="h-0.5 w-6 bg-amber-900" />
+          <span className="h-0.5 w-6 bg-amber-900" />
         </button>
       </div>
 
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-teal-900/10 px-4 pb-4 md:hidden">
+        <nav className="flex flex-col gap-1 border-t border-amber-900/10 px-4 pb-4 md:hidden">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-lg px-2 py-2.5 text-sm font-medium text-stone-700 hover:bg-teal-50"
+              className="rounded-lg px-2 py-2.5 text-sm font-medium text-stone-700 hover:bg-amber-50"
             >
               {link.label}
             </Link>
@@ -74,7 +74,7 @@ export default function Header() {
           <Link
             href="/marcar"
             onClick={() => setOpen(false)}
-            className="mt-2 rounded-full bg-teal-700 px-5 py-2.5 text-center text-sm font-semibold text-white"
+            className="mt-2 rounded-full bg-amber-700 px-5 py-2.5 text-center text-sm font-semibold text-white"
           >
             Marcar Consulta
           </Link>

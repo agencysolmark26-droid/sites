@@ -13,7 +13,7 @@ export default function MarcarPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
       <div className="mx-auto max-w-2xl text-center">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-teal-100 text-teal-800">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-amber-800">
           <CalendarIcon className="h-8 w-8" />
         </div>
         <h1 className="mt-4 text-4xl font-bold text-stone-900">Marcar Consulta</h1>

@@ -14,7 +14,7 @@ export default function Home() {
       {/* Hero */}
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 md:py-20">
         <div>
-          <p className="inline-block rounded-full bg-teal-100 px-4 py-1 text-sm font-medium text-teal-800">
+          <p className="inline-block rounded-full bg-amber-100 px-4 py-1 text-sm font-medium text-amber-800">
             Terapia complementar de equilíbrio biomagnético
           </p>
           <h1 className="mt-5 text-4xl font-bold leading-tight text-stone-900 sm:text-5xl">
@@ -29,13 +29,13 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/marcar"
-              className="rounded-full bg-teal-700 px-7 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-800"
+              className="rounded-full bg-amber-700 px-7 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-amber-800"
             >
               Marcar Consulta
             </Link>
             <Link
               href="/o-que-e-o-biomagnetismo"
-              className="rounded-full border border-teal-700 px-7 py-3 text-base font-semibold text-teal-800 transition-colors hover:bg-teal-50"
+              className="rounded-full border border-amber-700 px-7 py-3 text-base font-semibold text-amber-800 transition-colors hover:bg-amber-50"
             >
               O que é o biomagnetismo?
             </Link>
@@ -47,7 +47,7 @@ export default function Home() {
       </section>
 
       {/* What is biomagnetismo — short */}
-      <section className="bg-teal-50/60 py-16">
+      <section className="bg-amber-50/60 py-16">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 md:grid-cols-2">
           <GalleryPanel variant="balance" className="h-72 w-full" />
           <div>
@@ -68,7 +68,7 @@ export default function Home() {
             </p>
             <Link
               href="/o-que-e-o-biomagnetismo"
-              className="mt-5 inline-block font-semibold text-teal-800 underline underline-offset-4 hover:text-teal-900"
+              className="mt-5 inline-block font-semibold text-amber-800 underline underline-offset-4 hover:text-amber-900"
             >
               Saber mais sobre a técnica →
             </Link>
@@ -90,18 +90,18 @@ export default function Home() {
           {treatments.map((t) => (
             <div
               key={t.slug}
-              className="rounded-2xl border border-teal-900/10 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              className="rounded-2xl border border-amber-900/10 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
             >
               <div className="flex items-start justify-between">
                 <h3 className="text-lg font-semibold text-stone-900">{t.name}</h3>
-                <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800">
+                <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-800">
                   {t.duration}
                 </span>
               </div>
               <p className="mt-2 text-sm text-stone-600">{t.summary}</p>
               <Link
                 href={`/tratamentos#${t.slug}`}
-                className="mt-4 inline-block text-sm font-semibold text-teal-800 hover:text-teal-900"
+                className="mt-4 inline-block text-sm font-semibold text-amber-800 hover:text-amber-900"
               >
                 Ver detalhes →
               </Link>
@@ -112,7 +112,7 @@ export default function Home() {
         <div className="mt-10 text-center">
           <Link
             href="/marcar"
-            className="rounded-full bg-teal-700 px-7 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-800"
+            className="rounded-full bg-amber-700 px-7 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-amber-800"
           >
             Marcar a minha consulta
           </Link>
@@ -141,7 +141,7 @@ export default function Home() {
         </h2>
         <div className="mt-10 grid gap-8 sm:grid-cols-3">
           <div className="text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-100 text-teal-800">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 text-amber-800">
               <CalendarIcon className="h-9 w-9" />
             </div>
             <h3 className="mt-4 font-semibold text-stone-900">1. Escolha o dia e a hora</h3>
@@ -151,7 +151,7 @@ export default function Home() {
             </p>
           </div>
           <div className="text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-100 text-teal-800">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 text-amber-800">
               <HandsIcon className="h-9 w-9" />
             </div>
             <h3 className="mt-4 font-semibold text-stone-900">2. Preencha os seus dados</h3>
@@ -161,7 +161,7 @@ export default function Home() {
             </p>
           </div>
           <div className="text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-100 text-teal-800">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 text-amber-800">
               <LeafIcon className="h-9 w-9" />
             </div>
             <h3 className="mt-4 font-semibold text-stone-900">3. Compareça na clínica</h3>

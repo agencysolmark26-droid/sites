@@ -32,15 +32,15 @@ export function BodyEnergyIllustration({ className = "h-full w-full" }: { classN
     <svg viewBox="0 0 320 360" fill="none" className={className} aria-hidden="true">
       <defs>
         <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#5eead4" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#5eead4" stopOpacity="0" />
+          <stop offset="0%" stopColor="#fcd9a8" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#fcd9a8" stopOpacity="0" />
         </radialGradient>
       </defs>
 
       <circle cx="160" cy="180" r="150" fill="url(#glow)" />
 
       {/* silhouette */}
-      <g stroke="#0f766e" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" fill="#ccfbf1">
+      <g stroke="#92400e" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" fill="#f3e2c7">
         <circle cx="160" cy="70" r="34" />
         <path d="M120 118c-18 10-28 30-28 55v70c0 12 9 21 21 21h6l6 66h70l6-66h6c12 0 21-9 21-21v-70c0-25-10-45-28-55-16 12-64 12-80 0Z" />
       </g>
@@ -59,7 +59,7 @@ export function BodyEnergyIllustration({ className = "h-full w-full" }: { classN
           cx={cx}
           cy={cy}
           r="6"
-          fill="#0d9488"
+          fill="#b45309"
           className="animate-pulse"
           style={{ animationDelay: `${i * 0.25}s` }}
         />
@@ -68,7 +68,7 @@ export function BodyEnergyIllustration({ className = "h-full w-full" }: { classN
       {/* connecting field lines */}
       <path
         d="M100 150c-30 10-40 40-20 60M220 150c30 10 40 40 20 60"
-        stroke="#14b8a6"
+        stroke="#d97706"
         strokeWidth="2.5"
         strokeDasharray="6 6"
         fill="none"
@@ -86,68 +86,22 @@ export function BalancedFieldIllustration({ className = "h-full w-full" }: { cla
       className={className}
       aria-hidden="true"
     >
-      <rect width="400" height="300" rx="24" fill="#f0fdfa" />
-      <g opacity="0.5" stroke="#14b8a6" strokeWidth="1.4">
+      <rect width="400" height="300" rx="24" fill="#fbf3e7" />
+      <g opacity="0.5" stroke="#d97706" strokeWidth="1.4">
         {Array.from({ length: 9 }).map((_, i) => (
           <path key={i} d={`M${20 + i * 42} 20 Q ${20 + i * 42 + 21} 150 ${20 + i * 42} 280`} fill="none" />
         ))}
       </g>
-      <circle cx="150" cy="150" r="46" fill="#0f766e" />
-      <circle cx="250" cy="150" r="46" fill="#f59e0b" />
+      <circle cx="150" cy="150" r="46" fill="#92400e" />
+      <circle cx="250" cy="150" r="46" fill="#d97706" />
       <text x="150" y="158" fontSize="30" fill="white" textAnchor="middle" fontFamily="sans-serif">N</text>
       <text x="250" y="158" fontSize="30" fill="white" textAnchor="middle" fontFamily="sans-serif">S</text>
       <path
         d="M196 150h8"
-        stroke="#0f172a"
+        stroke="#44403c"
         strokeWidth="3"
         strokeLinecap="round"
       />
-    </svg>
-  );
-}
-
-export function EmotionalIcon({ className = "h-10 w-10" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
-      <path
-        d="M32 52S10 39 10 24a12 12 0 0 1 22-6 12 12 0 0 1 22 6c0 15-22 28-22 28Z"
-        fill="currentColor"
-        opacity="0.15"
-      />
-      <path
-        d="M32 52S10 39 10 24a12 12 0 0 1 22-6 12 12 0 0 1 22 6c0 15-22 28-22 28Z"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
-      <path d="M18 26h7l4-8 6 14 4-8h7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-export function SportIcon({ className = "h-10 w-10" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
-      <circle cx="44" cy="14" r="6" fill="currentColor" />
-      <path
-        d="M10 52l12-14 8 6 10-18M32 26l8 6 8-2"
-        stroke="currentColor"
-        strokeWidth="3.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M20 38l-6 14M40 32l6 6-4 12" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-export function FirstVisitIcon({ className = "h-10 w-10" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
-      <rect x="12" y="8" width="40" height="48" rx="4" stroke="currentColor" strokeWidth="3" />
-      <path d="M20 20h24M20 30h24M20 40h14" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <circle cx="46" cy="46" r="12" fill="white" stroke="currentColor" strokeWidth="3" />
-      <path d="M46 40v12M40 46h12" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
     </svg>
   );
 }
@@ -214,28 +168,28 @@ export function GalleryPanel({
   const base = "rounded-3xl overflow-hidden flex items-center justify-center";
   if (variant === "hands") {
     return (
-      <div className={`${base} bg-gradient-to-br from-teal-100 to-emerald-50 ${className}`}>
-        <HandsIcon className="h-24 w-24 text-teal-700" />
+      <div className={`${base} bg-gradient-to-br from-amber-100 to-orange-50 ${className}`}>
+        <HandsIcon className="h-24 w-24 text-amber-700" />
       </div>
     );
   }
   if (variant === "balance") {
     return (
-      <div className={`${base} bg-gradient-to-br from-amber-50 to-teal-50 ${className}`}>
+      <div className={`${base} bg-gradient-to-br from-orange-50 to-amber-100 ${className}`}>
         <BalancedFieldIllustration className="h-full w-full" />
       </div>
     );
   }
   if (variant === "meridians") {
     return (
-      <div className={`${base} bg-gradient-to-br from-teal-50 to-cyan-100 ${className}`}>
+      <div className={`${base} bg-gradient-to-br from-amber-50 to-amber-100 ${className}`}>
         <BodyEnergyIllustration className="h-full w-full max-w-[220px]" />
       </div>
     );
   }
   return (
-    <div className={`${base} bg-gradient-to-br from-emerald-50 to-teal-100 ${className}`}>
-      <LeafIcon className="h-24 w-24 text-emerald-700" />
+    <div className={`${base} bg-gradient-to-br from-orange-50 to-amber-100 ${className}`}>
+      <LeafIcon className="h-24 w-24 text-orange-700" />
     </div>
   );
 }

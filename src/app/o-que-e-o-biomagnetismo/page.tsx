@@ -5,7 +5,7 @@ import { BodyEnergyIllustration, GalleryPanel } from "@/components/illustrations
 export const metadata: Metadata = {
   title: "O que é o Biomagnetismo | Clínica Equilíbrio Bio",
   description:
-    "Entenda o que é o biomagnetismo, como funciona a técnica do Par Biomagnético e o que esperar de uma sessão.",
+    "Entenda o que é o biomagnetismo, como funciona a técnica do Biomagnetismo Clínico e o que esperar de uma sessão.",
 };
 
 export default function OQueEBiomagnetismoPage() {
@@ -15,7 +15,7 @@ export default function OQueEBiomagnetismoPage() {
         <div>
           <h1 className="text-4xl font-bold text-stone-900">O que é o Biomagnetismo</h1>
           <p className="mt-5 text-lg text-stone-600">
-            O Biomagnetismo, também conhecido como Par Biomagnético, é uma
+            O Biomagnetismo, também conhecido como Biomagnetismo Clínico, é uma
             terapia complementar desenvolvida a partir da observação de que
             muitos desequilíbrios no organismo estão associados a alterações
             no pH (equilíbrio ácido-base) de determinados tecidos.
@@ -35,11 +35,11 @@ export default function OQueEBiomagnetismoPage() {
         </div>
       </section>
 
-      <section className="bg-teal-50/60 py-16">
+      <section className="bg-amber-50/60 py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <h2 className="text-2xl font-bold text-stone-900">Como surgiu a técnica</h2>
           <p className="mt-4 text-stone-600">
-            O conceito de Par Biomagnético foi desenvolvido a partir de
+            O conceito de Biomagnetismo Clínico foi desenvolvido a partir de
             décadas de observação clínica, cruzando conhecimentos de
             biomagnetismo médico com uma leitura sistémica do corpo humano.
             Hoje, é praticado por terapeutas em diversos países como
@@ -54,7 +54,7 @@ export default function OQueEBiomagnetismoPage() {
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           <ol className="space-y-5">
             <li className="flex gap-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-700 text-sm font-bold text-white">1</span>
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-700 text-sm font-bold text-white">1</span>
               <p className="text-stone-600">
                 <span className="font-semibold text-stone-900">Conversa inicial —</span>{" "}
                 falamos sobre o seu historial de saúde, hábitos e queixas
@@ -62,7 +62,7 @@ export default function OQueEBiomagnetismoPage() {
               </p>
             </li>
             <li className="flex gap-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-700 text-sm font-bold text-white">2</span>
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-700 text-sm font-bold text-white">2</span>
               <p className="text-stone-600">
                 <span className="font-semibold text-stone-900">Escuta biomagnética —</span>{" "}
                 deitado(a) na marquesa, com roupa vestida, identificamos os
@@ -70,7 +70,7 @@ export default function OQueEBiomagnetismoPage() {
               </p>
             </li>
             <li className="flex gap-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-700 text-sm font-bold text-white">3</span>
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-700 text-sm font-bold text-white">3</span>
               <p className="text-stone-600">
                 <span className="font-semibold text-stone-900">Aplicação dos pares —</span>{" "}
                 colocamos os ímanes nos pontos identificados, permanecendo em
@@ -78,7 +78,7 @@ export default function OQueEBiomagnetismoPage() {
               </p>
             </li>
             <li className="flex gap-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-700 text-sm font-bold text-white">4</span>
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-700 text-sm font-bold text-white">4</span>
               <p className="text-stone-600">
                 <span className="font-semibold text-stone-900">Encerramento —</span>{" "}
                 terminamos com recomendações simples para os dias seguintes e,
@@ -104,7 +104,7 @@ export default function OQueEBiomagnetismoPage() {
         <div className="mt-10 text-center">
           <Link
             href="/marcar"
-            className="rounded-full bg-teal-700 px-7 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-800"
+            className="rounded-full bg-amber-700 px-7 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-amber-800"
           >
             Marcar a minha consulta
           </Link>

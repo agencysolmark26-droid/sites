@@ -26,18 +26,14 @@ export type NewAppointmentInput = {
 
 const DATA_FILE = path.join(process.cwd(), "data", "appointments.json");
 
-// Clinic hours: Monday–Friday 09:00–13:00 and 14:00–19:00, Saturday 09:00–13:00.
-// Sunday closed. Slots are 30 minutes apart.
+// Clinic hours: Monday–Saturday 09:00–19:00, Sunday closed.
+// Slots are 30 minutes apart.
 const SLOT_MINUTES = 30;
 
 function dayHours(dateStr: string): { start: string; end: string }[] {
   const day = new Date(`${dateStr}T00:00:00`).getDay(); // 0=Sun..6=Sat
   if (day === 0) return [];
-  if (day === 6) return [{ start: "09:00", end: "13:00" }];
-  return [
-    { start: "09:00", end: "13:00" },
-    { start: "14:00", end: "19:00" },
-  ];
+  return [{ start: "09:00", end: "19:00" }];
 }
 
 function toMinutes(hhmm: string): number {

@@ -124,8 +124,8 @@ export default function BookingForm() {
 
   if (success) {
     return (
-      <div className="mx-auto max-w-lg rounded-3xl border border-teal-200 bg-teal-50 p-8 text-center">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-teal-700 text-2xl text-white">
+      <div className="mx-auto max-w-lg rounded-3xl border border-amber-200 bg-amber-50 p-8 text-center">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-amber-700 text-2xl text-white">
           ✓
         </div>
         <h2 className="mt-4 text-2xl font-bold text-stone-900">Marcação confirmada!</h2>
@@ -148,7 +148,7 @@ export default function BookingForm() {
             setNotes("");
             setTime("");
           }}
-          className="mt-6 rounded-full bg-teal-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-teal-800"
+          className="mt-6 rounded-full bg-amber-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-amber-800"
         >
           Fazer outra marcação
         </button>
@@ -164,7 +164,7 @@ export default function BookingForm() {
         <select
           value={treatmentSlug}
           onChange={(e) => setTreatmentSlug(e.target.value)}
-          className="mt-2 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+          className="mt-2 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-200"
         >
           {treatments.map((t) => (
             <option key={t.slug} value={t.slug}>
@@ -188,7 +188,7 @@ export default function BookingForm() {
           min={minDate}
           value={date}
           onChange={(e) => handleDateChange(e.target.value)}
-          className="mt-2 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+          className="mt-2 w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-200"
         />
         <p className="mt-2 text-sm capitalize text-stone-500">{formatDatePT(date)}</p>
       </div>
@@ -211,8 +211,8 @@ export default function BookingForm() {
               onClick={() => setTime(s)}
               className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                 time === s
-                  ? "border-teal-700 bg-teal-700 text-white"
-                  : "border-stone-300 bg-white text-stone-700 hover:border-teal-500 hover:text-teal-700"
+                  ? "border-amber-700 bg-amber-700 text-white"
+                  : "border-stone-300 bg-white text-stone-700 hover:border-amber-500 hover:text-amber-700"
               }`}
             >
               {s}
@@ -235,7 +235,7 @@ export default function BookingForm() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-stone-900 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+            className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-stone-900 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-200"
             placeholder="O seu nome"
           />
           {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
@@ -251,7 +251,7 @@ export default function BookingForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-stone-900 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+              className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-stone-900 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-200"
               placeholder="nome@email.com"
             />
             {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
@@ -265,7 +265,7 @@ export default function BookingForm() {
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-stone-900 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+              className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-stone-900 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-200"
               placeholder="912 345 678"
             />
             {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
@@ -281,7 +281,7 @@ export default function BookingForm() {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             rows={3}
-            className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-stone-900 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+            className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-stone-900 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-200"
             placeholder="Alguma informação relevante para a sua consulta"
           />
         </div>
@@ -294,7 +294,7 @@ export default function BookingForm() {
       <button
         type="submit"
         disabled={submitting || slots.length === 0}
-        className="w-full rounded-full bg-teal-700 px-7 py-3.5 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-50"
+        className="w-full rounded-full bg-amber-700 px-7 py-3.5 text-base font-semibold text-white shadow-md transition-colors hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {submitting ? "A confirmar…" : "Confirmar marcação"}
       </button>

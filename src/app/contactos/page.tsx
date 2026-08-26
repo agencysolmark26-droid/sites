@@ -20,54 +20,50 @@ export default function ContactosPage() {
       </div>
 
       <div className="mt-12 grid gap-6 sm:grid-cols-3">
-        <div className="rounded-2xl border border-teal-900/10 bg-white p-6 text-center shadow-sm">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 text-teal-800">
+        <div className="rounded-2xl border border-amber-900/10 bg-white p-6 text-center shadow-sm">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-amber-800">
             <MagnetPairIcon className="h-7 w-7" />
           </div>
           <h2 className="mt-4 font-semibold text-stone-900">Morada</h2>
           <p className="mt-2 text-sm text-stone-600">
-            Rua das Terapias Naturais, 123
-            <br />
-            1000-000 Lisboa
+            Rua Teresa de Jesus Pereira, Nº 9
           </p>
         </div>
 
-        <div className="rounded-2xl border border-teal-900/10 bg-white p-6 text-center shadow-sm">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 text-teal-800">
+        <div className="rounded-2xl border border-amber-900/10 bg-white p-6 text-center shadow-sm">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-amber-800">
             <CalendarIcon className="h-7 w-7" />
           </div>
           <h2 className="mt-4 font-semibold text-stone-900">Horário</h2>
           <p className="mt-2 text-sm text-stone-600">
-            Seg–Sex: 09h–13h / 14h–19h
-            <br />
-            Sábado: 09h–13h
+            Segunda a Sábado: 09h–19h
             <br />
             Domingo: encerrado
           </p>
         </div>
 
-        <div className="rounded-2xl border border-teal-900/10 bg-white p-6 text-center shadow-sm">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 text-teal-800">
+        <div className="rounded-2xl border border-amber-900/10 bg-white p-6 text-center shadow-sm">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-amber-800">
             <LeafIcon className="h-7 w-7" />
           </div>
           <h2 className="mt-4 font-semibold text-stone-900">Contacto direto</h2>
           <p className="mt-2 text-sm text-stone-600">
-            +351 912 345 678
+            917 874 725
             <br />
             geral@equilibriobio.pt
           </p>
         </div>
       </div>
 
-      <div className="mt-14 rounded-3xl bg-teal-700 px-8 py-12 text-center text-white">
+      <div className="mt-14 rounded-3xl bg-amber-700 px-8 py-12 text-center text-white">
         <h2 className="text-2xl font-bold">Pronto para marcar a sua sessão?</h2>
-        <p className="mx-auto mt-2 max-w-md text-teal-100">
+        <p className="mx-auto mt-2 max-w-md text-amber-100">
           Consulte os horários disponíveis e marque a sua consulta em poucos
           minutos.
         </p>
         <Link
           href="/marcar"
-          className="mt-6 inline-block rounded-full bg-white px-7 py-3 text-base font-semibold text-teal-800 shadow-md transition-colors hover:bg-teal-50"
+          className="mt-6 inline-block rounded-full bg-white px-7 py-3 text-base font-semibold text-amber-800 shadow-md transition-colors hover:bg-amber-50"
         >
           Marcar Consulta
         </Link>

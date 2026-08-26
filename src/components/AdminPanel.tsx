@@ -60,14 +60,14 @@ export default function AdminPanel() {
             type="password"
             value={secret}
             onChange={(e) => setSecret(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200"
+            className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 focus:border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-200"
           />
         </div>
         {error && <p className="text-sm text-red-600">{error}</p>}
         <button
           type="submit"
           disabled={loading}
-          className="rounded-full bg-teal-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-teal-800 disabled:opacity-50"
+          className="rounded-full bg-amber-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-amber-800 disabled:opacity-50"
         >
           {loading ? "A entrar…" : "Entrar"}
         </button>
