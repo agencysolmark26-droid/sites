@@ -28,6 +28,7 @@ export type NewAppointmentInput = {
 // Clinic hours: Monday–Saturday 09:00–19:00, Sunday closed.
 // Slots are 30 minutes apart.
 const SLOT_MINUTES = 30;
+const CLINIC_TIMEZONE = "Europe/Lisbon";
 
 function dayHours(dateStr: string): { start: string; end: string }[] {
   const day = new Date(`${dateStr}T00:00:00`).getDay(); // 0=Sun..6=Sat
@@ -48,14 +49,40 @@ function toHHMM(mins: number): string {
   return `${h}:${m}`;
 }
 
+// Current date/time in the clinic's timezone, independent of the server's
+// own timezone (Vercel functions run in UTC).
+function nowAtClinic(): { dateStr: string; minutes: number } {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: CLINIC_TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "00";
+  const dateStr = `${get("year")}-${get("month")}-${get("day")}`;
+  const minutes = Number(get("hour")) * 60 + Number(get("minute"));
+  return { dateStr, minutes };
+}
+
+export function isDateInPast(dateStr: string): boolean {
+  return dateStr < nowAtClinic().dateStr;
+}
+
 export function getAllSlotsForDate(dateStr: string): string[] {
+  const { dateStr: todayStr, minutes: nowMinutes } = nowAtClinic();
+  if (dateStr < todayStr) return [];
+
   const ranges = dayHours(dateStr);
   const slots: string[] = [];
   for (const range of ranges) {
     let cur = toMinutes(range.start);
     const end = toMinutes(range.end);
     while (cur < end) {
-      slots.push(toHHMM(cur));
+      if (dateStr > todayStr || cur > nowMinutes) slots.push(toHHMM(cur));
       cur += SLOT_MINUTES;
     }
   }

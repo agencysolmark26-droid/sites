@@ -34,6 +34,7 @@ export default function BookingForm() {
   const [slots, setSlots] = useState<string[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(true);
   const [slotsError, setSlotsError] = useState("");
+  const [refreshToken, setRefreshToken] = useState(0);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -50,7 +51,7 @@ export default function BookingForm() {
   useEffect(() => {
     let cancelled = false;
 
-    fetch(`/api/marcacoes?date=${date}`)
+    fetch(`/api/marcacoes?date=${date}`, { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error("Falha ao obter horários.");
         return res.json();
@@ -71,7 +72,7 @@ export default function BookingForm() {
     return () => {
       cancelled = true;
     };
-  }, [date]);
+  }, [date, refreshToken]);
 
   function handleDateChange(newDate: string) {
     setDate(newDate);
@@ -147,6 +148,8 @@ export default function BookingForm() {
             setPhone("");
             setNotes("");
             setTime("");
+            setLoadingSlots(true);
+            setRefreshToken((v) => v + 1);
           }}
           className="mt-6 rounded-full bg-amber-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-amber-800"
         >

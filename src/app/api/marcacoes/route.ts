@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   createAppointment,
   getAvailableSlotsForDate,
+  isDateInPast,
   SlotUnavailableError,
 } from "@/lib/appointments";
 import { treatments } from "@/lib/treatments";
+
+export const dynamic = "force-dynamic";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -50,11 +53,8 @@ export async function POST(request: NextRequest) {
   if (!EMAIL_RE.test(email)) errors.email = "Indique um email válido.";
   if (phone.replace(/\D/g, "").length < 9) errors.phone = "Indique um contacto válido.";
 
-  if (DATE_RE.test(date)) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const selected = new Date(`${date}T00:00:00`);
-    if (selected < today) errors.date = "A data tem de ser hoje ou no futuro.";
+  if (DATE_RE.test(date) && isDateInPast(date)) {
+    errors.date = "A data tem de ser hoje ou no futuro.";
   }
 
   if (Object.keys(errors).length > 0) {
