@@ -125,6 +125,11 @@ export default function OQueEBiomagnetismoPage() {
             circulação e promove um estado geral de relaxamento e
             equilíbrio — física e mentalmente.
           </p>
+          <p className="mt-4 text-stone-600">
+            É também particularmente eficaz na redução de níveis elevados de
+            stress e ansiedade, ajudando o corpo e a mente a regressar a um
+            estado de calma.
+          </p>
         </div>
       </section>
 

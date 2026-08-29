@@ -30,10 +30,11 @@ export const treatments: Treatment[] = [
     summary:
       "Técnica manual que aplica pressão em pontos específicos do corpo para aliviar tensões, promover o relaxamento e estimular o equilíbrio energético.",
     description:
-      "A Acupressão utiliza a pressão dos dedos e das mãos sobre pontos específicos do corpo — os mesmos pontos trabalhados na acupuntura, mas sem agulhas. Ajuda a aliviar tensões musculares, dores de cabeça, ansiedade e cansaço, promovendo um estado geral de relaxamento e bem-estar.",
+      "A Acupressão utiliza a pressão dos dedos e das mãos sobre pontos específicos do corpo — os mesmos pontos trabalhados na acupuntura, mas sem agulhas. Ajuda a aliviar tensões musculares, dores de cabeça, ansiedade e cansaço, e é particularmente eficaz a reduzir níveis elevados de stress, promovendo um estado geral de relaxamento e bem-estar.",
     benefits: [
       "Técnica manual, sem agulhas",
       "Ajuda a aliviar tensão e dores de cabeça",
+      "Ajuda a reduzir níveis elevados de stress",
       "Promove relaxamento profundo",
       "Pode ser combinada com o Biomagnetismo Clínico",
     ],
