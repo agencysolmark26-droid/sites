@@ -22,12 +22,26 @@ O armazenamento tem dois modos, escolhidos automaticamente:
 
 A área da clínica (`/admin`) usa a variável de ambiente `ADMIN_SECRET` como palavra-passe de acesso — ver `.env.example`. Se não for definida, usa uma palavra-passe por omissão (apenas para desenvolvimento).
 
+## Aviso por email de nova marcação
+
+Sempre que é feita uma marcação, o site tenta enviar um email de aviso para a clínica, usando o [Resend](https://resend.com). Isto é opcional: sem a variável `RESEND_API_KEY` definida, as marcações continuam a funcionar normalmente, só não há aviso por email.
+
+Para ativar:
+
+1. Criar conta gratuita em [resend.com](https://resend.com).
+2. Em **API Keys**, criar uma nova chave e copiar o valor.
+3. No Vercel, em **Settings → Environment Variables**, adicionar `RESEND_API_KEY` com esse valor.
+4. (Opcional) Adicionar `NOTIFY_EMAIL` com o email para onde quer receber os avisos — se não definir, usa o email de contacto da clínica.
+5. Fazer um novo deployment (ou "Redeploy") para as variáveis passarem a ter efeito.
+
+Nota: sem verificar um domínio próprio no Resend, os emails são enviados a partir de `onboarding@resend.dev` (endereço de testes do Resend) — funciona bem para receber os avisos, mas não deve ser usado para responder a clientes.
+
 ## Publicar no Vercel
 
 1. Criar conta em [vercel.com](https://vercel.com) (pode entrar diretamente com o GitHub).
 2. **Add New… → Project**, escolher o repositório `agencysolmark26-droid/sites` e a branch pretendida.
 3. Antes ou depois do primeiro deploy, ir a **Storage** → **Create Database** → escolher **Neon (Postgres)** e ligar ao projeto. Isto cria automaticamente a variável de ambiente `DATABASE_URL`.
-4. Em **Settings → Environment Variables**, adicionar `ADMIN_SECRET` com a palavra-passe pretendida para a área da clínica.
+4. Em **Settings → Environment Variables**, adicionar `ADMIN_SECRET` com a palavra-passe pretendida para a área da clínica, e opcionalmente `RESEND_API_KEY` / `NOTIFY_EMAIL` (ver secção acima).
 5. Clicar em **Deploy**. O site fica disponível num link público (`*.vercel.app`), e volta a publicar-se automaticamente sempre que houver um novo push na branch ligada.
 
 ## Desenvolvimento
