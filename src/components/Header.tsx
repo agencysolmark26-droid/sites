@@ -7,7 +7,7 @@ import { MagnetPairIcon } from "./illustrations";
 
 const navLinks = [
   { href: "/", label: "Início" },
-  { href: "/o-que-e-o-biomagnetismo", label: "O que é o Biomagnetismo" },
+  { href: "/o-que-e-o-biomagnetismo", label: "As Nossas Técnicas" },
   { href: "/tratamentos", label: "Tratamentos" },
   { href: "/contactos", label: "Contactos" },
 ];
@@ -22,7 +22,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2 text-amber-800">
           <MagnetPairIcon className="h-9 w-9" />
           <span className="text-lg font-semibold tracking-tight">
-            Clínica Equilíbrio Bio
+            Consultório Alexandra Maia
           </span>
         </Link>
 

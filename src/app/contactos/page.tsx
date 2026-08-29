@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { CalendarIcon, LeafIcon, MagnetPairIcon } from "@/components/illustrations";
 
 export const metadata: Metadata = {
-  title: "Contactos | Clínica Equilíbrio Bio",
+  title: "Contactos | Consultório Alexandra Maia",
   description:
-    "Contactos, morada e horário de funcionamento da Clínica Equilíbrio Bio.",
+    "Contactos, morada e horário de funcionamento do Consultório Alexandra Maia.",
 };
 
 export default function ContactosPage() {

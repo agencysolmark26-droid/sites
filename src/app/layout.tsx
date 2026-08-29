@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clínica Equilíbrio Bio | Biomagnetismo",
+  title: "Consultório Alexandra Maia | Biomagnetismo",
   description:
     "Clínica de biomagnetismo. Marque a sua consulta online e conheça os nossos tratamentos de equilíbrio biomagnético.",
 };

@@ -4,9 +4,9 @@ import { MagnetPairIcon, HandsIcon } from "@/components/illustrations";
 import { treatments } from "@/lib/treatments";
 
 export const metadata: Metadata = {
-  title: "Tratamentos | Clínica Equilíbrio Bio",
+  title: "Tratamentos | Consultório Alexandra Maia",
   description:
-    "Conheça os tratamentos da Clínica Equilíbrio Bio: Biomagnetismo Clínico e Acupressão.",
+    "Conheça os tratamentos do Consultório Alexandra Maia: Biomagnetismo Clínico e Acupressão.",
 };
 
 const icons: Record<string, React.ComponentType<{ className?: string }>> = {

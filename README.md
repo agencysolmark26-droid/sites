@@ -1,4 +1,4 @@
-# Clínica Equilíbrio Bio
+# Consultório Alexandra Maia
 
 Site para uma clínica de biomagnetismo, construído com [Next.js](https://nextjs.org) (App Router) e Tailwind CSS.
 

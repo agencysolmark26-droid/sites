@@ -21,7 +21,7 @@ export default function Home() {
             Reencontre o equilíbrio natural do seu corpo
           </h1>
           <p className="mt-5 max-w-lg text-lg text-stone-600">
-            Na Clínica Equilíbrio Bio ajudamo-lo a cuidar de si através do
+            No Consultório Alexandra Maia ajudamo-lo a cuidar de si através do
             biomagnetismo, numa abordagem calma, personalizada e sem dor.
             Marque a sua consulta em poucos minutos, à hora que melhor lhe
             convier.

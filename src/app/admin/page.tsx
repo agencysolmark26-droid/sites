@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AdminPanel from "@/components/AdminPanel";
 
 export const metadata: Metadata = {
-  title: "Área da Clínica | Clínica Equilíbrio Bio",
+  title: "Área da Clínica | Consultório Alexandra Maia",
   robots: { index: false, follow: false },
 };
 

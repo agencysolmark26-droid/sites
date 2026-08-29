@@ -8,7 +8,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2 text-white">
             <MagnetPairIcon className="h-8 w-8" />
-            <span className="text-lg font-semibold">Clínica Equilíbrio Bio</span>
+            <span className="text-lg font-semibold">Consultório Alexandra Maia</span>
           </div>
           <p className="mt-3 max-w-xs text-sm text-amber-200">
             Espaço dedicado ao biomagnetismo, focado no equilíbrio natural do
@@ -21,7 +21,7 @@ export default function Footer() {
             Navegação
           </h3>
           <ul className="mt-4 space-y-2 text-sm text-amber-100">
-            <li><Link href="/o-que-e-o-biomagnetismo" className="hover:text-white">O que é o Biomagnetismo</Link></li>
+            <li><Link href="/o-que-e-o-biomagnetismo" className="hover:text-white">As Nossas Técnicas</Link></li>
             <li><Link href="/tratamentos" className="hover:text-white">Tratamentos</Link></li>
             <li><Link href="/marcar" className="hover:text-white">Marcar Consulta</Link></li>
             <li><Link href="/contactos" className="hover:text-white">Contactos</Link></li>
@@ -47,7 +47,7 @@ export default function Footer() {
           acompanhamento médico convencional.
         </p>
         <p className="mt-1">
-          © {new Date().getFullYear()} Clínica Equilíbrio Bio. Todos os direitos reservados.
+          © {new Date().getFullYear()} Consultório Alexandra Maia. Todos os direitos reservados.
         </p>
       </div>
     </footer>

@@ -4,7 +4,7 @@ import BookingForm from "@/components/BookingForm";
 import { CalendarIcon } from "@/components/illustrations";
 
 export const metadata: Metadata = {
-  title: "Marcar Consulta | Clínica Equilíbrio Bio",
+  title: "Marcar Consulta | Consultório Alexandra Maia",
   description:
     "Marque a sua consulta de biomagnetismo online: escolha o dia, a hora e preencha os seus dados pessoais.",
 };
