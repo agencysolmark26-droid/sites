@@ -149,6 +149,14 @@ async function getAllAppointmentsFromFile(): Promise<Appointment[]> {
   return readAllFromFile();
 }
 
+async function deleteAppointmentFromFile(id: string): Promise<boolean> {
+  const all = await readAllFromFile();
+  const next = all.filter((a) => a.id !== id);
+  if (next.length === all.length) return false;
+  await writeAllToFile(next);
+  return true;
+}
+
 // ---------------------------------------------------------------------------
 // Postgres backend (Neon) — used automatically when DATABASE_URL is set,
 // which is the case once a database is linked to the Vercel project.
@@ -207,6 +215,14 @@ async function createAppointmentInDb(appointment: Appointment): Promise<void> {
     if (code === "23505") throw new SlotUnavailableError();
     throw err;
   }
+}
+
+async function deleteAppointmentFromDb(id: string): Promise<boolean> {
+  await ensureSchema();
+  const rows = (await sql!`
+    DELETE FROM appointments WHERE id = ${id} RETURNING id
+  `) as { id: string }[];
+  return rows.length > 0;
 }
 
 async function getAllAppointmentsFromDb(): Promise<Appointment[]> {
@@ -268,4 +284,8 @@ export async function getAllAppointments(): Promise<Appointment[]> {
   return all.sort((a, b) =>
     a.date === b.date ? a.time.localeCompare(b.time) : a.date.localeCompare(b.date)
   );
+}
+
+export async function cancelAppointment(id: string): Promise<boolean> {
+  return usingDb ? deleteAppointmentFromDb(id) : deleteAppointmentFromFile(id);
 }

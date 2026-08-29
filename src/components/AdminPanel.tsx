@@ -24,6 +24,8 @@ export default function AdminPanel() {
   const [appointments, setAppointments] = useState<Appointment[] | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [cancellingId, setCancellingId] = useState<string | null>(null);
+  const [cancelError, setCancelError] = useState("");
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -45,6 +47,33 @@ export default function AdminPanel() {
       setError("Erro de ligação. Tente novamente.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleCancel(appointment: Appointment) {
+    const confirmed = window.confirm(
+      `Cancelar a marcação de ${appointment.name} em ${appointment.date} às ${appointment.time}?`
+    );
+    if (!confirmed) return;
+
+    setCancelError("");
+    setCancellingId(appointment.id);
+    try {
+      const res = await fetch("/api/admin/marcacoes", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret, id: appointment.id }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCancelError(data.error ?? "Não foi possível cancelar a marcação.");
+        return;
+      }
+      setAppointments((prev) => prev?.filter((a) => a.id !== appointment.id) ?? prev);
+    } catch {
+      setCancelError("Erro de ligação. Tente novamente.");
+    } finally {
+      setCancellingId(null);
     }
   }
 
@@ -80,6 +109,7 @@ export default function AdminPanel() {
       <p className="mb-4 text-sm text-stone-500">
         {appointments.length} marcação(ões) encontrada(s).
       </p>
+      {cancelError && <p className="mb-4 text-sm text-red-600">{cancelError}</p>}
       <div className="overflow-x-auto rounded-2xl border border-stone-200">
         <table className="min-w-full divide-y divide-stone-200 text-sm">
           <thead className="bg-stone-50 text-left text-stone-500">
@@ -91,6 +121,7 @@ export default function AdminPanel() {
               <th className="px-4 py-3 font-medium">Email</th>
               <th className="px-4 py-3 font-medium">Telemóvel</th>
               <th className="px-4 py-3 font-medium">Notas</th>
+              <th className="px-4 py-3 font-medium"></th>
             </tr>
           </thead>
           <tbody className="divide-y divide-stone-100 bg-white">
@@ -105,11 +136,21 @@ export default function AdminPanel() {
                 <td className="px-4 py-3 max-w-[200px] truncate" title={a.notes}>
                   {a.notes || "—"}
                 </td>
+                <td className="px-4 py-3 text-right">
+                  <button
+                    type="button"
+                    onClick={() => handleCancel(a)}
+                    disabled={cancellingId === a.id}
+                    className="rounded-full border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-700 hover:bg-red-50 disabled:opacity-50"
+                  >
+                    {cancellingId === a.id ? "A cancelar…" : "Cancelar"}
+                  </button>
+                </td>
               </tr>
             ))}
             {appointments.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-4 py-6 text-center text-stone-400">
+                <td colSpan={8} className="px-4 py-6 text-center text-stone-400">
                   Ainda não há marcações.
                 </td>
               </tr>
