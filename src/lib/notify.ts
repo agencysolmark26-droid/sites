@@ -1,7 +1,7 @@
 import type { Appointment } from "./appointments";
 import { getTreatmentBySlug } from "./treatments";
 
-const DEFAULT_NOTIFY_EMAIL = "geral@equilibriobio.pt";
+const DEFAULT_NOTIFY_EMAIL = "consultorioalexabdrabio@gmail.com";
 
 export async function sendBookingNotification(appointment: Appointment): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;

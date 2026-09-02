@@ -50,7 +50,7 @@ export default function ContactosPage() {
           <p className="mt-2 text-sm text-stone-600">
             917 874 725
             <br />
-            geral@equilibriobio.pt
+            consultorioalexabdrabio@gmail.com
           </p>
         </div>
       </div>

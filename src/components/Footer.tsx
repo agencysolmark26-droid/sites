@@ -35,7 +35,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-amber-100">
             <li>Rua Teresa de Jesus Pereira, Nº 9</li>
             <li>917 874 725</li>
-            <li>geral@equilibriobio.pt</li>
+            <li>consultorioalexabdrabio@gmail.com</li>
             <li>Seg–Sáb 09h–19h</li>
           </ul>
         </div>
