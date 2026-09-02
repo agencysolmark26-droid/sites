@@ -11,7 +11,7 @@ export async function sendBookingNotification(appointment: Appointment): Promise
   const treatmentName = getTreatmentBySlug(appointment.treatmentSlug)?.name ?? appointment.treatmentSlug;
 
   try {
-    await fetch("https://api.resend.com/emails", {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -34,6 +34,11 @@ export async function sendBookingNotification(appointment: Appointment): Promise
         `,
       }),
     });
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      console.error(`Falha ao enviar notificação (Resend ${res.status}): ${body}`);
+    }
   } catch (err) {
     // Never let a notification failure break the booking itself.
     console.error("Falha ao enviar notificação de marcação:", err);
