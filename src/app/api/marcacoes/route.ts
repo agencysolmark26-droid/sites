@@ -6,7 +6,7 @@ import {
   SlotUnavailableError,
 } from "@/lib/appointments";
 import { treatments } from "@/lib/treatments";
-import { sendBookingNotification } from "@/lib/notify";
+import { sendBookingNotification, sendBookingConfirmationToClient } from "@/lib/notify";
 
 export const dynamic = "force-dynamic";
 
@@ -72,7 +72,10 @@ export async function POST(request: NextRequest) {
       phone,
       notes,
     });
-    await sendBookingNotification(appointment);
+    await Promise.all([
+      sendBookingNotification(appointment),
+      sendBookingConfirmationToClient(appointment),
+    ]);
     return NextResponse.json({ appointment }, { status: 201 });
   } catch (err) {
     if (err instanceof SlotUnavailableError) {

@@ -22,19 +22,19 @@ O armazenamento tem dois modos, escolhidos automaticamente:
 
 A área da clínica (`/admin`) usa a variável de ambiente `ADMIN_SECRET` como palavra-passe de acesso — ver `.env.example`. Se não for definida, usa uma palavra-passe por omissão (apenas para desenvolvimento).
 
-## Aviso por email de nova marcação
+## Emails (confirmação ao cliente + aviso à clínica)
 
-Sempre que é feita uma marcação, o site tenta enviar um email de aviso para a clínica, usando o [Resend](https://resend.com). Isto é opcional: sem a variável `RESEND_API_KEY` definida, as marcações continuam a funcionar normalmente, só não há aviso por email.
+Sempre que é feita uma marcação, o site usa o [Resend](https://resend.com) para enviar dois emails: uma confirmação para o cliente (`src/lib/notify.ts` → `sendBookingConfirmationToClient`) e um aviso interno para a clínica (`sendBookingNotification`). Isto é opcional: sem a variável `RESEND_API_KEY` definida, as marcações continuam a funcionar normalmente, só não há emails.
 
-Para ativar:
+O domínio `consultorioalexandramaia.com` está verificado no Resend (DNS configurado no Hostinger), pelo que os emails são enviados a partir de `marcacoes@consultorioalexandramaia.com` para qualquer destinatário, incluindo os clientes.
 
-1. Criar conta gratuita em [resend.com](https://resend.com).
+Para ativar/configurar:
+
+1. Criar conta gratuita em [resend.com](https://resend.com) e verificar o domínio em **Domains**.
 2. Em **API Keys**, criar uma nova chave e copiar o valor.
 3. No Vercel, em **Settings → Environment Variables**, adicionar `RESEND_API_KEY` com esse valor.
-4. (Opcional) Adicionar `NOTIFY_EMAIL` com o email para onde quer receber os avisos — se não definir, usa o email de contacto da clínica.
+4. (Opcional) Adicionar `NOTIFY_EMAIL` com o email para onde quer receber os avisos internos — se não definir, usa o email de contacto da clínica.
 5. Fazer um novo deployment (ou "Redeploy") para as variáveis passarem a ter efeito.
-
-Nota: sem verificar um domínio próprio no Resend, os emails são enviados a partir de `onboarding@resend.dev` (endereço de testes do Resend) — funciona bem para receber os avisos, mas não deve ser usado para responder a clientes.
 
 ## Publicar no Vercel
 
